@@ -1,0 +1,7 @@
+once/data/000???/
+once/train*_cam??
+once/train/*_lidar
+once/val/*_cam??
+once/val/*_lidar
+
+images/
