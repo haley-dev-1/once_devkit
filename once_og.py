@@ -35,7 +35,7 @@ class ONCE(object):
                 - ...
                 -
     """
-    camera_names = ['cam01']
+    camera_names = ['cam03']
     camera_tags = ['top', 'top2', 'left_back', 'left_front', 'right_front', 'right_back', 'back']
 
     def __init__(self, dataset_root):
@@ -140,7 +140,8 @@ class ONCE(object):
 
     def load_image(self, seq_id, frame_id, cam_name):
         cam_path = osp.join(self.data_root, seq_id, cam_name, '{}.jpg'.format(frame_id))
-        print(cam_path)
+        # ./once/data/seq_id/cam_name/'{}.jpg'
+        print("cam path: ", cam_path, " for ", self.camera_names)
         img_buf = cv2.cvtColor(cv2.imread(cam_path), cv2.COLOR_BGR2RGB)
         return img_buf
 
@@ -166,6 +167,10 @@ class ONCE(object):
         new_cam_intrinsic_dict = dict()
         split_name = self._find_split_name(seq_id)
         frame_info = getattr(self, '{}_info'.format(split_name))[seq_id][frame_id]
+
+        print("seq_id: ", seq_id)
+        print("frane id: ", frame_id)
+
         for cam_name in self.__class__.camera_names:
             img_buf = self.load_image(seq_id, frame_id, cam_name)
             cam_calib = frame_info['calib'][cam_name]
